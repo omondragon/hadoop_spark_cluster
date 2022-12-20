@@ -16,7 +16,7 @@ sudo apt-get install sshpass -y
 sshpass -p 'hadoop' ssh -o StrictHostKeyChecking=no hadoop@nodemaster 'ssh-keygen -b 4096 -N "" -f /home/hadoop/.ssh/id_rsa'
 sshpass -p 'hadoop' ssh-copy-id -o StrictHostKeyChecking=no -i /home/hadoop/.ssh/id_rsa.pub hadoop@nodemaster
 sshpass -p 'hadoop' ssh-copy-id -o StrictHostKeyChecking=no -i /home/hadoop/.ssh/id_rsa.pub hadoop@node1
-#sshpass -p 'hadoop' ssh-copy-id -o StrictHostKeyChecking=no -i /home/hadoop/.ssh/id_rsa.pub hadoop@node2
+sshpass -p 'hadoop' ssh-copy-id -o StrictHostKeyChecking=no -i /home/hadoop/.ssh/id_rsa.pub hadoop@node2
 
 echo "Download Hadoop"
 su -l hadoop -c "wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz > .null;

@@ -18,10 +18,25 @@ Vagrant.configure(2) do |config|
                         "--memory", "1024",
                         "--cpus", "2"]
         end
-        node1.vm.network :private_network, ip: "192.168.200.2"
+        node1.vm.network :private_network, ip: "192.168.200.4"
         node1.vm.hostname = "node1"
         node1.vm.provision :shell, path: "scripts/setup-hosts.sh"
         node1.vm.provision :shell, path: "scripts/setup-node.sh"
+    end
+
+    config.vm.define "node2" do |node2|
+        node2.vm.boot_timeout   = 9000
+        node2.vm.box = "bento/ubuntu-22.04"
+        node2.vm.provider "virtualbox" do |v|
+           v.customize [
+                        "modifyvm", :id,
+                        "--memory", "1024",
+                        "--cpus", "2"]
+        end
+        node2.vm.network :private_network, ip: "192.168.200.5"
+        node2.vm.hostname = "node2"
+        node2.vm.provision :shell, path: "scripts/setup-hosts.sh"
+        node2.vm.provision :shell, path: "scripts/setup-node.sh"
     end
 
     config.vm.define "nodemaster" do |nodemaster|
@@ -35,4 +50,5 @@ Vagrant.configure(2) do |config|
         nodemaster.vm.provision :shell, path: "scripts/setup-hosts.sh"
         nodemaster.vm.provision :shell, path: "scripts/setup-master.sh"
     end
+
 end
